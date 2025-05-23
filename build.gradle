@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.eu.hanana.reimu.lib.ottohub'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.14'
+    implementation 'org.projectlombok:lombok:1.18.30' // 请使用最新版本
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'org.apache.logging.log4j:log4j-api:2.17.2' // 用实际的Log4j版本替代 x.x
+    implementation 'org.apache.logging.log4j:log4j-core:2.17.2'
+
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
