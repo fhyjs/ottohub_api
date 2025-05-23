@@ -1,9 +1,10 @@
 plugins {
     id 'java'
+    id 'maven-publish'  // 用于发布
 }
 
 group = 'org.eu.hanana.reimu.lib.ottohub'
-version = '1.0-SNAPSHOT'
+version = '1.0.0'
 
 repositories {
     mavenCentral()
@@ -23,4 +24,42 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java  // 发布 Java 项目
+
+            groupId = project.group  // 修改为您的组织 ID
+            artifactId = 'ottohub_api'  // 修改为您的项目名称
+            version = project.version  // 修改为您的版本号
+
+            // 这里可以添加其他信息，例如 POM 文件中的描述信息
+            pom {
+                name = 'ottohub_api'
+                description = 'ottohub_api'
+                //url = 'https://your.project.url'
+                licenses {
+                    license {
+                        name = 'Apache License 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/fhyjs/ottohub_api.git'
+                    developerConnection = 'scm:git:ssh://github.com/fhyjs/ottohub_api.git'
+                    url = 'https://github.com/fhyjs/ottohub_api'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            url 'https://maven.hanana2.link:2053/releases'
+            credentials {
+                username lcUsername
+                password lcPassword
+            }
+        }
+    }
 }

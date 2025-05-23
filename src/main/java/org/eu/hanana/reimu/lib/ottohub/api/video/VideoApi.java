@@ -51,8 +51,8 @@ public class VideoApi extends ApiBase implements IVideoApi {
     }
 
     @Override
-    public VideoListResult get_video_detail(int vid) {
-        return gson.fromJson(sendGet(getUrlWithArgs(TOKEN,ottohubApi.getLoginToken(),ACTION,"get_video_detail","vid", String.valueOf(vid))), VideoListResult.class);
+    public VideoResult get_video_detail(int vid) {
+        return gson.fromJson(sendGet(getUrlWithArgs(TOKEN,ottohubApi.getLoginToken(),ACTION,"get_video_detail","vid", String.valueOf(vid))), VideoResult.class);
     }
 
     @Override

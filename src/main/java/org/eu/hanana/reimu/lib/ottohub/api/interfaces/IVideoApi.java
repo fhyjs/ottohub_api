@@ -14,5 +14,5 @@ public interface IVideoApi {
     VideoListResult id_video_list(int vid);
     VideoListResult user_video_list(int uid,int offset,int num);
     VideoListResult audit_video_list(int offset,int num);
-    VideoListResult get_video_detail(int vid);
+    VideoResult get_video_detail(int vid);
 }
