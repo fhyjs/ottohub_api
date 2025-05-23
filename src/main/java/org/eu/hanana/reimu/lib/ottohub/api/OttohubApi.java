@@ -8,7 +8,9 @@ import org.eu.hanana.reimu.lib.ottohub.api.auth.LoginResult;
 import org.eu.hanana.reimu.lib.ottohub.api.blog.BlogApi;
 import org.eu.hanana.reimu.lib.ottohub.api.interfaces.IAuthApi;
 import org.eu.hanana.reimu.lib.ottohub.api.interfaces.IBlogApi;
+import org.eu.hanana.reimu.lib.ottohub.api.interfaces.IUserApi;
 import org.eu.hanana.reimu.lib.ottohub.api.interfaces.IVideoApi;
+import org.eu.hanana.reimu.lib.ottohub.api.user.UserApi;
 import org.eu.hanana.reimu.lib.ottohub.api.video.VideoApi;
 
 public class OttohubApi {
@@ -25,6 +27,8 @@ public class OttohubApi {
     protected IVideoApi videoApi = new VideoApi(this);
     @Getter
     protected IBlogApi blogApi = new BlogApi(this);
+    @Getter
+    protected IUserApi userApi = new UserApi(this);
     public OttohubApi(){
         httpClient = new OkHttpClient.Builder().build();
     }
