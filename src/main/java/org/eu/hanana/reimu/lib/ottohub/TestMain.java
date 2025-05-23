@@ -7,6 +7,7 @@ import org.eu.hanana.reimu.lib.ottohub.api.OttohubApi;
 import org.eu.hanana.reimu.lib.ottohub.api.auth.LoginResult;
 import org.eu.hanana.reimu.lib.ottohub.api.blog.BlogListResult;
 import org.eu.hanana.reimu.lib.ottohub.api.blog.BlogResult;
+import org.eu.hanana.reimu.lib.ottohub.api.system.VersionResult;
 import org.eu.hanana.reimu.lib.ottohub.api.user.UserResult;
 import org.eu.hanana.reimu.lib.ottohub.api.video.VideoListResult;
 import org.eu.hanana.reimu.lib.ottohub.api.video.VideoResult;
@@ -39,5 +40,8 @@ public class TestMain {
         log.info("Testing user api...");
         UserResult userResult = ottohubApi.getUserApi().get_user_detail(4384);
         log.info(new Gson().toJson(userResult));
+        log.info("Testing system api...");
+        VersionResult version = ottohubApi.getSystemApi().version();
+        log.info("Api Ver: {}",version.version);
     }
 }

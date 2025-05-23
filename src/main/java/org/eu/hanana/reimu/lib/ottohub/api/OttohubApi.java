@@ -6,10 +6,8 @@ import okhttp3.OkHttpClient;
 import org.eu.hanana.reimu.lib.ottohub.api.auth.AuthApi;
 import org.eu.hanana.reimu.lib.ottohub.api.auth.LoginResult;
 import org.eu.hanana.reimu.lib.ottohub.api.blog.BlogApi;
-import org.eu.hanana.reimu.lib.ottohub.api.interfaces.IAuthApi;
-import org.eu.hanana.reimu.lib.ottohub.api.interfaces.IBlogApi;
-import org.eu.hanana.reimu.lib.ottohub.api.interfaces.IUserApi;
-import org.eu.hanana.reimu.lib.ottohub.api.interfaces.IVideoApi;
+import org.eu.hanana.reimu.lib.ottohub.api.interfaces.*;
+import org.eu.hanana.reimu.lib.ottohub.api.system.SystemApi;
 import org.eu.hanana.reimu.lib.ottohub.api.user.UserApi;
 import org.eu.hanana.reimu.lib.ottohub.api.video.VideoApi;
 
@@ -29,6 +27,8 @@ public class OttohubApi {
     protected IBlogApi blogApi = new BlogApi(this);
     @Getter
     protected IUserApi userApi = new UserApi(this);
+    @Getter
+    protected ISystemApi systemApi = new SystemApi(this);
     public OttohubApi(){
         httpClient = new OkHttpClient.Builder().build();
     }
