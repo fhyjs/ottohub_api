@@ -7,6 +7,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 
@@ -21,7 +22,10 @@ public abstract class ApiBase {
         this.ottohubApi=ottohubApi;
         this.apiUrl = ottohubApi.apiHost+"?module="+getModule();
     }
-
+    @Nullable
+    public String getToken(){
+        return ottohubApi.getLoginToken();
+    }
     public OkHttpClient getHttpClient() {
         return ottohubApi.getHttpClient();
     }
