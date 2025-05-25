@@ -2,14 +2,14 @@ package org.eu.hanana.reimu.lib.ottohub.api;
 
 import com.google.gson.Gson;
 import lombok.SneakyThrows;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import okhttp3.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.eu.hanana.reimu.lib.ottohub.util.ProgressedRequestBody;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.util.Map;
 
 public abstract class ApiBase {
     public static final String ACTION = "action";
@@ -43,6 +43,35 @@ public abstract class ApiBase {
             log.error(e);
             throw e;
         }
+    }
+    @SneakyThrows
+    public String sendPost(String url, RequestBody requestBody){
+        var request = new Request.Builder()
+                .url(url) // 目标 URL
+                .post(requestBody) // GET 请求
+                .build();
+        Response execute = null;
+        try {
+            execute = getHttpClient().newCall(request).execute();
+            return execute.body().string();
+        } catch (IOException e) {
+            log.error(e);
+            throw e;
+        }
+    }
+    public ProgressedRequestBody newRequestBody(Map<String,RequestBody> data){
+        return this.newRequestBody(null,data);
+    }
+    public ProgressedRequestBody newRequestBody(@Nullable ProgressedRequestBody.ProgressListener listener,Map<String,RequestBody> data){
+        MultipartBody.Builder multipartBuilder = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM);
+        data.forEach((s, requestBody) -> {
+            multipartBuilder.addFormDataPart(s,s,requestBody);
+        });
+        if (listener==null){
+            listener= (written, length, progress) -> {};
+        }
+        return new ProgressedRequestBody(multipartBuilder.build(),listener);
     }
     /**
      * @param kv k1,v1,k2,v2,k3,v3,...

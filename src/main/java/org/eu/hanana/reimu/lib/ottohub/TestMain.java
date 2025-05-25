@@ -65,5 +65,10 @@ public class TestMain {
         log.info(" -Favorite vid:{},count:{}",testVid.vid,ottohubApi.getEngagementApi().favorite_video(testVid.vid).like_favorite);
         log.info(" -Like bid:{},count:{}",testVid.vid,ottohubApi.getEngagementApi().like_blog(testBlog.bid).like_count);
         log.info(" -Favorite bid:{},count:{}",testVid.vid,ottohubApi.getEngagementApi().favorite_blog(testBlog.bid).like_favorite);
+        log.info("test report in  blog 4543");
+        ottohubApi.getModerationApi().report_blog(4543);
+        ottohubApi.getModerationApi().reject_blog(4543);
+        ottohubApi.getManageApi().appeal_blog(4543);
+        ottohubApi.getModerationApi().approve_blog(4543);
     }
 }
