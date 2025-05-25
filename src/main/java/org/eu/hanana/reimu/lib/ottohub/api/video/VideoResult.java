@@ -10,7 +10,7 @@ public class VideoResult extends ApiResultBase {
     public int like_count;
     public int favorite_count;
     public int view_count;
-    public String title,time;
+    public String title,time,intro;
     public String cover_url,username,avatar_url,userintro,video_url,tag;
     public int if_like,if_favorite;
 
