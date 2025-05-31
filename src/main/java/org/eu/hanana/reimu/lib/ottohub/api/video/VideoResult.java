@@ -6,7 +6,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class VideoResult extends ApiResultBase {
     public int vid;
-    public int uid,category,type;
+    public int uid,category,type,is_deleted,audit_status;
     public int like_count;
     public int favorite_count;
     public int view_count;
