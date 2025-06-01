@@ -7,5 +7,5 @@ public class EngagementResult extends ApiResultBase {
     /**
      * The amount of favorite;
      */
-    public int like_favorite;
+    public int favorite_count;
 }

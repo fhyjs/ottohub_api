@@ -62,9 +62,9 @@ public class TestMain {
         var testVid = randomVideoList.video_list.get(1);
         var testBlog = random_blog_list.blog_list.get(1);
         log.info(" -Like vid:{},count:{}",testVid.vid,ottohubApi.getEngagementApi().like_video(testVid.vid).like_count);
-        log.info(" -Favorite vid:{},count:{}",testVid.vid,ottohubApi.getEngagementApi().favorite_video(testVid.vid).like_favorite);
+        log.info(" -Favorite vid:{},count:{}",testVid.vid,ottohubApi.getEngagementApi().favorite_video(testVid.vid).favorite_count);
         log.info(" -Like bid:{},count:{}",testVid.vid,ottohubApi.getEngagementApi().like_blog(testBlog.bid).like_count);
-        log.info(" -Favorite bid:{},count:{}",testVid.vid,ottohubApi.getEngagementApi().favorite_blog(testBlog.bid).like_favorite);
+        log.info(" -Favorite bid:{},count:{}",testVid.vid,ottohubApi.getEngagementApi().favorite_blog(testBlog.bid).favorite_count);
         log.info("test report in  blog 4543");
         ottohubApi.getModerationApi().report_blog(4543);
         ottohubApi.getModerationApi().reject_blog(4543);
