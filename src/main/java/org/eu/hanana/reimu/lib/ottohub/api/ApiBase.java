@@ -3,8 +3,6 @@ package org.eu.hanana.reimu.lib.ottohub.api;
 import com.google.gson.Gson;
 import lombok.SneakyThrows;
 import okhttp3.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.eu.hanana.reimu.lib.ottohub.util.ProgressedRequestBody;
 import org.jetbrains.annotations.Nullable;
 
@@ -14,7 +12,6 @@ import java.util.Map;
 public abstract class ApiBase {
     public static final String ACTION = "action";
     public static final String TOKEN = "token";
-    private static final Logger log = LogManager.getLogger(ApiBase.class);
     protected final OttohubApi ottohubApi;
     protected String apiUrl;
     protected Gson gson= new Gson();
@@ -40,7 +37,7 @@ public abstract class ApiBase {
             execute = getHttpClient().newCall(request).execute();
             return execute.body().string();
         } catch (IOException e) {
-            log.error(e);
+            e.printStackTrace();
             throw e;
         }
     }
@@ -55,7 +52,7 @@ public abstract class ApiBase {
             execute = getHttpClient().newCall(request).execute();
             return execute.body().string();
         } catch (IOException e) {
-            log.error(e);
+            e.printStackTrace();
             throw e;
         }
     }

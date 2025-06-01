@@ -13,6 +13,7 @@ import org.eu.hanana.reimu.lib.ottohub.api.im.MessageApi;
 import org.eu.hanana.reimu.lib.ottohub.api.interfaces.*;
 import org.eu.hanana.reimu.lib.ottohub.api.manage.ManageApi;
 import org.eu.hanana.reimu.lib.ottohub.api.moderation.ModerationApi;
+import org.eu.hanana.reimu.lib.ottohub.api.profile.ProfileApi;
 import org.eu.hanana.reimu.lib.ottohub.api.system.SystemApi;
 import org.eu.hanana.reimu.lib.ottohub.api.user.UserApi;
 import org.eu.hanana.reimu.lib.ottohub.api.video.VideoApi;
@@ -47,6 +48,8 @@ public class OttohubApi {
     protected IModerationApi moderationApi = new ModerationApi(this);
     @Getter
     protected IDanmakuApi danmakuApi = new DanmakuApi(this);
+    @Getter
+    protected IProfileApi profileApi = new ProfileApi(this);
 
     public OttohubApi(){
         httpClient = new OkHttpClient.Builder().build();
