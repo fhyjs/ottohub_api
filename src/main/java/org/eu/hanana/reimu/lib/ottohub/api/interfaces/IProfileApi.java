@@ -13,7 +13,7 @@ public interface IProfileApi {
     @RequireToken
     FavoriteVideoListResult favorite_video_list(int offset, int num);
     @RequireToken
-    ProfileResult user_profile();
+    UserProfileResult user_profile();
     @RequireToken
     EmptyResult update_username(String username);
     @RequireToken

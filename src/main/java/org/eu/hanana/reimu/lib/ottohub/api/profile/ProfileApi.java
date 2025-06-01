@@ -29,8 +29,8 @@ public class ProfileApi extends ApiBase implements IProfileApi {
     }
 
     @Override
-    public ProfileResult user_profile() {
-        return gson.fromJson(sendGet(getUrlWithArgs(TOKEN,getToken(),ACTION,"user_profile")), ProfileResult.class);
+    public UserProfileResult user_profile() {
+        return gson.fromJson(sendGet(getUrlWithArgs(TOKEN,getToken(),ACTION,"user_profile")), UserProfileResult.class);
     }
 
     @Override
