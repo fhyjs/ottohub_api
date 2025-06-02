@@ -74,11 +74,11 @@ public abstract class ApiBase {
      * @param kv k1,v1,k2,v2,k3,v3,...
      * @return full api url
      */
-    public String getUrlWithArgs(String... kv){
+    public String getUrlWithArgs(Object... kv){
         var sb = new StringBuilder(apiUrl);
         for (int i = 0; i < kv.length; i+=2) {
             if (kv[i]==null||kv[i+1]==null) continue;
-            sb.append('&').append(kv[i]).append('=').append(kv[i+1]);
+            sb.append('&').append(kv[i].toString()).append('=').append(kv[i+1].toString());
         }
         return sb.toString();
     }

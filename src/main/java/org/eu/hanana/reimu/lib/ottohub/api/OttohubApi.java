@@ -6,6 +6,7 @@ import okhttp3.OkHttpClient;
 import org.eu.hanana.reimu.lib.ottohub.api.auth.AuthApi;
 import org.eu.hanana.reimu.lib.ottohub.api.auth.LoginResult;
 import org.eu.hanana.reimu.lib.ottohub.api.blog.BlogApi;
+import org.eu.hanana.reimu.lib.ottohub.api.comment.CommentApi;
 import org.eu.hanana.reimu.lib.ottohub.api.danmaku.DanmakuApi;
 import org.eu.hanana.reimu.lib.ottohub.api.engagement.EngagementApi;
 import org.eu.hanana.reimu.lib.ottohub.api.following.FollowingApi;
@@ -50,6 +51,8 @@ public class OttohubApi {
     protected IDanmakuApi danmakuApi = new DanmakuApi(this);
     @Getter
     protected IProfileApi profileApi = new ProfileApi(this);
+    @Getter
+    protected ICommentApi commentApi = new CommentApi(this);
 
     public OttohubApi(){
         httpClient = new OkHttpClient.Builder().build();
