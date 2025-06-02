@@ -42,4 +42,6 @@ public interface IProfileApi {
     AvatarListResult audit_avatar_list(int offset,int num);
     @RequireToken
     CoverListResult audit_cover_list(int offset,int num);
+    @RequireToken
+    VideoListResult history_video_list();
 }

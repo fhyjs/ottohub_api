@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'org.eu.hanana.reimu.lib.ottohub'
-version = '1.0.7.2'
+version = '1.0.7.3'
 
 repositories {
     mavenCentral()

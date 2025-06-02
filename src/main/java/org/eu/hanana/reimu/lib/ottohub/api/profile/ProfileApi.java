@@ -7,6 +7,7 @@ import org.eu.hanana.reimu.lib.ottohub.api.common.EmptyResult;
 import org.eu.hanana.reimu.lib.ottohub.api.interfaces.IProfileApi;
 import org.eu.hanana.reimu.lib.ottohub.api.user.UserListResult;
 import org.eu.hanana.reimu.lib.ottohub.api.user.UserResult;
+import org.eu.hanana.reimu.lib.ottohub.api.video.VideoListResult;
 
 public class ProfileApi extends ApiBase implements IProfileApi {
     public ProfileApi(OttohubApi ottohubApi) {
@@ -105,5 +106,10 @@ public class ProfileApi extends ApiBase implements IProfileApi {
     @Override
     public CoverListResult audit_cover_list(int offset, int num) {
         return gson.fromJson(sendGet(getUrlWithArgs(TOKEN,getToken(),ACTION,"audit_cover_list","offset", String.valueOf(offset),"num",String.valueOf(num))), CoverListResult.class);
+    }
+
+    @Override
+    public VideoListResult history_video_list() {
+        return gson.fromJson(sendGet(getUrlWithArgs(TOKEN,getToken(),ACTION,"history_video_list")), VideoListResult.class);
     }
 }
