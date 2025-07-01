@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.util.Map;
 
 public abstract class ApiBase {
+    public static final MediaType TYPE_TEXT_PLAIN = MediaType.get("text/plain");
+    public static final MediaType TYPE_VIDEO_MP4 = MediaType.get("video/mp4");
+    public static final MediaType TYPE_IMAGE_JPEG = MediaType.get("image/jpeg");
     public static final String ACTION = "action";
     public static final String TOKEN = "token";
     protected final OttohubApi ottohubApi;
@@ -63,7 +66,7 @@ public abstract class ApiBase {
         MultipartBody.Builder multipartBuilder = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM);
         data.forEach((s, requestBody) -> {
-            multipartBuilder.addFormDataPart(s,s,requestBody);
+            multipartBuilder.addFormDataPart(s,null,requestBody);
         });
         if (listener==null){
             listener= (written, length, progress) -> {};

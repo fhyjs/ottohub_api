@@ -14,14 +14,32 @@ import org.eu.hanana.reimu.lib.ottohub.api.user.UserListResult;
 import org.eu.hanana.reimu.lib.ottohub.api.user.UserResult;
 import org.eu.hanana.reimu.lib.ottohub.api.video.VideoListResult;
 import org.eu.hanana.reimu.lib.ottohub.api.video.VideoResult;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.Date;
 
 public class TestMain {
     private static final Logger log = LogManager.getLogger(TestMain.class);
 
-    public static void main(String[] args) {
+    @Test
+    public void main() {
+        String username = System.getenv("OTTOHUB_USERNAME");
+        String password = System.getenv("OTTOHUB_PASSWORD");
+
+        if (username == null || password == null) {
+            System.err.println("未设置 OTTOHUB_USERNAME 或 OTTOHUB_PASSWORD 环境变量");
+            return;
+        }
+
+        System.out.println("用户名：" + username);
+        System.out.println("密码长度：" + password.length()); // 不打印密码内容
+
+
         System.out.println("Hello world!");
         OttohubApi ottohubApi = new OttohubApi();
-        LoginResult login = ottohubApi.getAuthApi().login(args[0], args[1]);
+        LoginResult login = ottohubApi.getAuthApi().login(username,password);
         log.info("Login success uid:{},token:{}",login.uid,login.token);
         log.info("Testing video api...");
         VideoListResult randomVideoList = ottohubApi.getVideoApi().random_video_list(20);
@@ -70,5 +88,10 @@ public class TestMain {
         ottohubApi.getModerationApi().reject_blog(4543);
         ottohubApi.getManageApi().appeal_blog(4543);
         ottohubApi.getModerationApi().approve_blog(4543);
+
+        log.info("Testing creator api...");
+        ottohubApi.getCreatorApi().save_blog(new Date().toString());
+        String time = ottohubApi.getCreatorApi().load_blog().content;
+        log.info(" -Loaded blog : {}",time);
     }
 }

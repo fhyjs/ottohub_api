@@ -16,8 +16,8 @@ public class UserApi extends ApiBase implements IUserApi {
     }
 
     @Override
-    public UserListResult select_user_list(String search_term, int num) {
-        return gson.fromJson(sendGet(getUrlWithArgs(ACTION,"select_user_list","num", String.valueOf(num),"search_term",search_term)), UserListResult.class);
+    public UserListResult search_user_list(String search_term, int num) {
+        return gson.fromJson(sendGet(getUrlWithArgs(ACTION,"search_user_list","num", String.valueOf(num),"search_term",search_term)), UserListResult.class);
     }
 
     @Override
