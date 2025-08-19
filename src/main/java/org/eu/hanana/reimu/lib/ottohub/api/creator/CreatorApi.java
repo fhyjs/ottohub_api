@@ -30,7 +30,8 @@ public class CreatorApi extends ApiBase implements ICreatorApi {
         return gson.fromJson(sendPost(getApiUrl(action),newRequestBody(progressListener,Map.of(
                 ACTION, RequestBody.create(action,TYPE_TEXT_PLAIN),
                 TOKEN,  RequestBody.create(getToken(),TYPE_TEXT_PLAIN),
-                "content",  RequestBody.create(content,TYPE_TEXT_PLAIN)
+                "content",  RequestBody.create(content,TYPE_TEXT_PLAIN),
+                "title",  RequestBody.create(title,TYPE_TEXT_PLAIN)
         ))),SubmitBlogResult.class);
     }
 
