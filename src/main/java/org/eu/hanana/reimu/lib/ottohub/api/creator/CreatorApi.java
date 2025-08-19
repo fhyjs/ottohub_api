@@ -7,6 +7,7 @@ import org.eu.hanana.reimu.lib.ottohub.api.OttohubApi;
 import org.eu.hanana.reimu.lib.ottohub.api.common.EmptyResult;
 import org.eu.hanana.reimu.lib.ottohub.api.interfaces.ICreatorApi;
 import org.eu.hanana.reimu.lib.ottohub.util.InputStreamRequestBody;
+import org.eu.hanana.reimu.lib.ottohub.util.ProgressedRequestBody;
 
 import java.io.InputStream;
 import java.util.Locale;
@@ -24,9 +25,9 @@ public class CreatorApi extends ApiBase implements ICreatorApi {
     }
 
     @Override
-    public SubmitBlogResult submit_blog(String title, String content) {
+    public SubmitBlogResult submit_blog(String title, String content, ProgressedRequestBody.ProgressListener progressListener) {
         var action = "submit_blog";
-        return gson.fromJson(sendPost(getApiUrl(action),newRequestBody(Map.of(
+        return gson.fromJson(sendPost(getApiUrl(action),newRequestBody(progressListener,Map.of(
                 ACTION, RequestBody.create(action,TYPE_TEXT_PLAIN),
                 TOKEN,  RequestBody.create(getToken(),TYPE_TEXT_PLAIN),
                 "content",  RequestBody.create(content,TYPE_TEXT_PLAIN)
@@ -34,9 +35,9 @@ public class CreatorApi extends ApiBase implements ICreatorApi {
     }
 
     @Override
-    public EmptyResult submit_video(String title, String intro, int category, String tag, InputStream file_mp4, InputStream file_jpg) {
+    public EmptyResult submit_video(String title, String intro, int category, String tag, InputStream file_mp4, InputStream file_jpg, ProgressedRequestBody.ProgressListener progressListener) {
         var action = "submit_video";
-        return gson.fromJson(sendPost(getApiUrl(action),newRequestBody(Map.of(
+        return gson.fromJson(sendPost(getApiUrl(action),newRequestBody(progressListener,Map.of(
                 ACTION, RequestBody.create(action,TYPE_TEXT_PLAIN),
                 TOKEN,  RequestBody.create(getToken(),TYPE_TEXT_PLAIN),
                 "title",  RequestBody.create(title,TYPE_TEXT_PLAIN),
@@ -49,9 +50,9 @@ public class CreatorApi extends ApiBase implements ICreatorApi {
     }
 
     @Override
-    public EmptyResult update_avatar(InputStream file_jpg) {
+    public EmptyResult update_avatar(InputStream file_jpg, ProgressedRequestBody.ProgressListener progressListener) {
         var action = "update_avatar";
-        return gson.fromJson(sendPost(getApiUrl(action),newRequestBody(Map.of(
+        return gson.fromJson(sendPost(getApiUrl(action),newRequestBody(progressListener,Map.of(
                 ACTION, RequestBody.create(action,TYPE_TEXT_PLAIN),
                 TOKEN,  RequestBody.create(getToken(),TYPE_TEXT_PLAIN),
                 "file_jpg",  new InputStreamRequestBody(file_jpg,TYPE_IMAGE_JPEG)
@@ -59,9 +60,9 @@ public class CreatorApi extends ApiBase implements ICreatorApi {
     }
 
     @Override
-    public EmptyResult update_cover(InputStream file_jpg) {
+    public EmptyResult update_cover(InputStream file_jpg, ProgressedRequestBody.ProgressListener progressListener) {
         var action = "update_cover";
-        return gson.fromJson(sendPost(getApiUrl(action),newRequestBody(Map.of(
+        return gson.fromJson(sendPost(getApiUrl(action),newRequestBody(progressListener,Map.of(
                 ACTION, RequestBody.create(action,TYPE_TEXT_PLAIN),
                 TOKEN,  RequestBody.create(getToken(),TYPE_TEXT_PLAIN),
                 "file_jpg",  new InputStreamRequestBody(file_jpg,TYPE_IMAGE_JPEG)
@@ -69,13 +70,38 @@ public class CreatorApi extends ApiBase implements ICreatorApi {
     }
 
     @Override
-    public EmptyResult save_blog(String content) {
+    public EmptyResult save_blog(String content, ProgressedRequestBody.ProgressListener progressListener) {
         var action = "save_blog";
-        return gson.fromJson(sendPost(getApiUrl(action),newRequestBody(Map.of(
+        return gson.fromJson(sendPost(getApiUrl(action),newRequestBody(progressListener,Map.of(
                 ACTION, RequestBody.create(action,TYPE_TEXT_PLAIN),
                 TOKEN,  RequestBody.create(getToken(),TYPE_TEXT_PLAIN),
                 "content",  RequestBody.create(content,TYPE_TEXT_PLAIN)
         ))),EmptyResult.class);
+    }
+
+    @Override
+    public SubmitBlogResult submit_blog(String title, String content) {
+        return this.submit_blog(title,content,null);
+    }
+
+    @Override
+    public EmptyResult submit_video(String title, String intro, int category, String tag, InputStream file_mp4, InputStream file_jpg) {
+        return this.submit_video(title,intro,category,tag,file_mp4,file_jpg,null);
+    }
+
+    @Override
+    public EmptyResult update_avatar(InputStream file_jpg) {
+        return update_avatar(file_jpg,null);
+    }
+
+    @Override
+    public EmptyResult update_cover(InputStream file_jpg) {
+        return update_cover(file_jpg,null);
+    }
+
+    @Override
+    public EmptyResult save_blog(String content) {
+        return save_blog(content,null);
     }
 
     @Override
