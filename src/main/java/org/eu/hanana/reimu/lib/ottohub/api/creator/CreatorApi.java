@@ -36,7 +36,7 @@ public class CreatorApi extends ApiBase implements ICreatorApi {
     }
 
     @Override
-    public EmptyResult submit_video(String title, String intro, int category, String tag, InputStream file_mp4, InputStream file_jpg, ProgressedRequestBody.ProgressListener progressListener) {
+    public EmptyResult submit_video(String title, String intro, int category,int type, String tag, InputStream file_mp4, InputStream file_jpg, ProgressedRequestBody.ProgressListener progressListener) {
         var action = "submit_video";
         return gson.fromJson(sendPost(getApiUrl(action),newRequestBody(progressListener,Map.of(
                 ACTION, RequestBody.create(action,TYPE_TEXT_PLAIN),
@@ -44,6 +44,7 @@ public class CreatorApi extends ApiBase implements ICreatorApi {
                 "title",  RequestBody.create(title,TYPE_TEXT_PLAIN),
                 "intro",  RequestBody.create(intro,TYPE_TEXT_PLAIN),
                 "category",  RequestBody.create(String.valueOf(category),TYPE_TEXT_PLAIN),
+                "type",  RequestBody.create(String.valueOf(type),TYPE_TEXT_PLAIN),
                 "tag",  RequestBody.create(tag,TYPE_TEXT_PLAIN),
                 "file_mp4",  new InputStreamRequestBody(file_mp4,TYPE_VIDEO_MP4),
                 "file_jpg",  new InputStreamRequestBody(file_jpg,TYPE_IMAGE_JPEG)
@@ -86,8 +87,8 @@ public class CreatorApi extends ApiBase implements ICreatorApi {
     }
 
     @Override
-    public EmptyResult submit_video(String title, String intro, int category, String tag, InputStream file_mp4, InputStream file_jpg) {
-        return this.submit_video(title,intro,category,tag,file_mp4,file_jpg,null);
+    public EmptyResult submit_video(String title, String intro, int category,int type, String tag, InputStream file_mp4, InputStream file_jpg) {
+        return this.submit_video(title,intro,category,type,tag,file_mp4,file_jpg,null);
     }
 
     @Override

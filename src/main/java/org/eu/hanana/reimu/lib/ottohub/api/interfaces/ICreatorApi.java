@@ -12,7 +12,7 @@ public interface ICreatorApi {
     @RequireToken
     SubmitBlogResult submit_blog(String title,String content);
     @RequireToken
-    EmptyResult submit_video(String title, String intro, int category, String tag, InputStream file_mp4, InputStream file_jpg);
+    EmptyResult submit_video(String title, String intro, int category,int type, String tag, InputStream file_mp4, InputStream file_jpg);
     @RequireToken
     EmptyResult update_avatar(InputStream file_jpg);
     @RequireToken
@@ -27,7 +27,7 @@ public interface ICreatorApi {
     @RequireToken
     SubmitBlogResult submit_blog(String title, String content, ProgressedRequestBody.ProgressListener progressListener);
     @RequireToken
-    EmptyResult submit_video(String title, String intro, int category, String tag, InputStream file_mp4, InputStream file_jpg, ProgressedRequestBody.ProgressListener progressListener);
+    EmptyResult submit_video(String title, String intro, int category,int type, String tag, InputStream file_mp4, InputStream file_jpg, ProgressedRequestBody.ProgressListener progressListener);
     @RequireToken
     EmptyResult update_avatar(InputStream file_jpg, ProgressedRequestBody.ProgressListener progressListener);
     @RequireToken
