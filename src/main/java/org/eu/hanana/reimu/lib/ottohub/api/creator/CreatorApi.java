@@ -46,8 +46,8 @@ public class CreatorApi extends ApiBase implements ICreatorApi {
                 "category",  RequestBody.create(String.valueOf(category),TYPE_TEXT_PLAIN),
                 "type",  RequestBody.create(String.valueOf(type),TYPE_TEXT_PLAIN),
                 "tag",  RequestBody.create(tag,TYPE_TEXT_PLAIN),
-                "file_mp4",  new InputStreamRequestBody(file_mp4,TYPE_VIDEO_MP4),
-                "file_jpg",  new InputStreamRequestBody(file_jpg,TYPE_IMAGE_JPEG)
+                "file_mp4",  new InputStreamRequestBody(file_mp4,TYPE_VIDEO_MP4).setName("video.mp4"),
+                "file_jpg",  new InputStreamRequestBody(file_jpg,TYPE_IMAGE_JPEG).setName("cover.jpg")
         ))),EmptyResult.class);
     }
 
@@ -57,7 +57,7 @@ public class CreatorApi extends ApiBase implements ICreatorApi {
         return gson.fromJson(sendPost(getApiUrl(action),newRequestBody(progressListener,Map.of(
                 ACTION, RequestBody.create(action,TYPE_TEXT_PLAIN),
                 TOKEN,  RequestBody.create(getToken(),TYPE_TEXT_PLAIN),
-                "file_jpg",  new InputStreamRequestBody(file_jpg,TYPE_IMAGE_JPEG)
+                "file_jpg",  new InputStreamRequestBody(file_jpg,TYPE_IMAGE_JPEG).setName("file.jpg")
         ))),EmptyResult.class);
     }
 
@@ -67,7 +67,7 @@ public class CreatorApi extends ApiBase implements ICreatorApi {
         return gson.fromJson(sendPost(getApiUrl(action),newRequestBody(progressListener,Map.of(
                 ACTION, RequestBody.create(action,TYPE_TEXT_PLAIN),
                 TOKEN,  RequestBody.create(getToken(),TYPE_TEXT_PLAIN),
-                "file_jpg",  new InputStreamRequestBody(file_jpg,TYPE_IMAGE_JPEG)
+                "file_jpg",  new InputStreamRequestBody(file_jpg,TYPE_IMAGE_JPEG).setName("file.jpg")
         ))),EmptyResult.class);
     }
 

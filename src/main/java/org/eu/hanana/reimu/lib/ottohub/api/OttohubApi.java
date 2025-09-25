@@ -6,6 +6,7 @@ import okhttp3.OkHttpClient;
 import org.eu.hanana.reimu.lib.ottohub.api.auth.AuthApi;
 import org.eu.hanana.reimu.lib.ottohub.api.auth.LoginResult;
 import org.eu.hanana.reimu.lib.ottohub.api.blog.BlogApi;
+import org.eu.hanana.reimu.lib.ottohub.api.collection.CollectionApi;
 import org.eu.hanana.reimu.lib.ottohub.api.comment.CommentApi;
 import org.eu.hanana.reimu.lib.ottohub.api.creator.CreatorApi;
 import org.eu.hanana.reimu.lib.ottohub.api.danmaku.DanmakuApi;
@@ -56,6 +57,8 @@ public class OttohubApi {
     protected ICommentApi commentApi = new CommentApi(this);
     @Getter
     protected ICreatorApi creatorApi = new CreatorApi(this);
+    @Getter
+    protected ICollectionApi collectionApi = new CollectionApi(this);
 
     public OttohubApi(){
         httpClient = new OkHttpClient.Builder().build();

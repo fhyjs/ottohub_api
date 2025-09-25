@@ -1,11 +1,13 @@
 package org.eu.hanana.reimu.lib.ottohub.api;
 
+import kotlin.ExperimentalStdlibApi;
 import org.eu.hanana.reimu.lib.ottohub.api.interfaces.IStatusGetter;
 import org.jetbrains.annotations.Nullable;
 
 public class ApiResultBase implements IStatusGetter {
     public String status;
     public String message;
+    public int code;
     @Override
     public String getStatus() {
         return status;

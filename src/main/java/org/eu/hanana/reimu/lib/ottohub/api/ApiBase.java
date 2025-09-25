@@ -3,6 +3,7 @@ package org.eu.hanana.reimu.lib.ottohub.api;
 import com.google.gson.Gson;
 import lombok.SneakyThrows;
 import okhttp3.*;
+import org.eu.hanana.reimu.lib.ottohub.api.interfaces.IHasName;
 import org.eu.hanana.reimu.lib.ottohub.util.ProgressedRequestBody;
 import org.jetbrains.annotations.Nullable;
 
@@ -66,7 +67,11 @@ public abstract class ApiBase {
         MultipartBody.Builder multipartBuilder = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM);
         data.forEach((s, requestBody) -> {
-            multipartBuilder.addFormDataPart(s,null,requestBody);
+            String fn = null;
+            if (requestBody instanceof IHasName){
+                fn=((IHasName) requestBody).getName();
+            }
+            multipartBuilder.addFormDataPart(s,fn,requestBody);
         });
         if (listener==null){
             listener= (written, length, progress) -> {};

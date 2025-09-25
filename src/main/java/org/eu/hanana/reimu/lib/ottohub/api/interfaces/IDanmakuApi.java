@@ -8,4 +8,8 @@ public interface IDanmakuApi {
     DanmakuListResult get_danmaku(int vid);
     @RequireToken
     EmptyResult send_danmaku(int vid,String text,double time,String mode,String color,String font_size,String render);
+    @RequireToken
+    EmptyResult delete_danmaku(long danmaku_id);
+    @RequireToken
+    EmptyResult report_danmaku(long danmaku_id);
 }

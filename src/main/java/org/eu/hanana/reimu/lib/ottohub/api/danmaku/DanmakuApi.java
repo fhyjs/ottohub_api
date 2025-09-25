@@ -24,4 +24,14 @@ public class DanmakuApi extends ApiBase implements IDanmakuApi {
     public EmptyResult send_danmaku(int vid, String text, double time, String mode, String color, String font_size, String render) {
         return gson.fromJson(sendGet(getUrlWithArgs(TOKEN,getToken(),ACTION,"send_danmaku","vid", String.valueOf(vid),"text",text,"time",String.valueOf(time),"mode",mode,"color",color,"font_size",font_size,"render",render)), EmptyResult.class);
     }
+
+    @Override
+    public EmptyResult delete_danmaku(long danmaku_id) {
+        return gson.fromJson(sendGet(getUrlWithArgs(TOKEN,getToken(),ACTION,"delete_danmaku","danmaku_id",danmaku_id)), EmptyResult.class);
+    }
+
+    @Override
+    public EmptyResult report_danmaku(long danmaku_id) {
+        return gson.fromJson(sendGet(getUrlWithArgs(TOKEN,getToken(),ACTION,"report_danmaku","danmaku_id",danmaku_id)), EmptyResult.class);
+    }
 }
