@@ -24,4 +24,9 @@ public class SystemApi extends ApiBase implements ISystemApi {
     public SlideshowResult slideshow() {
         return gson.fromJson(sendGet(getUrlWithArgs(ACTION,"slideshow")), SlideshowResult.class);
     }
+
+    @Override
+    public LaunchScreenUrlResult launch_screen() {
+        return gson.fromJson(sendGet(getUrlWithArgs(ACTION,"launch_screen")), LaunchScreenUrlResult.class);
+    }
 }

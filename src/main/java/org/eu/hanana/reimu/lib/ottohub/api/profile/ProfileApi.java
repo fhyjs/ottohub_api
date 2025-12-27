@@ -112,4 +112,9 @@ public class ProfileApi extends ApiBase implements IProfileApi {
     public VideoListResult history_video_list() {
         return gson.fromJson(sendGet(getUrlWithArgs(TOKEN,getToken(),ACTION,"history_video_list")), VideoListResult.class);
     }
+
+    @Override
+    public IsAuditResult is_audit() {
+        return gson.fromJson(sendGet(getUrlWithArgs(TOKEN,getToken(),ACTION,"is_audit")), IsAuditResult.class);
+    }
 }

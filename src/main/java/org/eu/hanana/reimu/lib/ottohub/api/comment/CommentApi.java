@@ -54,4 +54,34 @@ public class CommentApi extends ApiBase implements ICommentApi {
     public EmptyResult report_video_comment(int vcid) {
         return gson.fromJson(sendGet(getUrlWithArgs(TOKEN,getToken(),ACTION,"report_video_comment","vcid", vcid)), EmptyResult.class);
     }
+
+    @Override
+    public CommentListResult audit_blog_comment_list(int offset, int num) {
+        return gson.fromJson(sendGet(getUrlWithArgs(TOKEN,getToken(),ACTION,"audit_blog_comment_list","offset",offset,"num",num)), CommentListResult.class);
+    }
+
+    @Override
+    public CommentListResult audit_video_comment_list(int offset, int num) {
+        return gson.fromJson(sendGet(getUrlWithArgs(TOKEN,getToken(),ACTION,"audit_video_comment_list","offset",offset,"num",num)), CommentListResult.class);
+    }
+
+    @Override
+    public EmptyResult approve_blog_comment(int bcid) {
+        return gson.fromJson(sendGet(getUrlWithArgs(TOKEN,getToken(),ACTION,"approve_blog_comment","bcid",bcid)), EmptyResult.class);
+    }
+
+    @Override
+    public EmptyResult approve_video_comment(int vcid) {
+        return gson.fromJson(sendGet(getUrlWithArgs(TOKEN,getToken(),ACTION,"approve_video_comment","vcid",vcid)), EmptyResult.class);
+    }
+
+    @Override
+    public EmptyResult reject_blog_comment(int bcid) {
+        return gson.fromJson(sendGet(getUrlWithArgs(TOKEN,getToken(),ACTION,"reject_blog_comment","bcid",bcid)), EmptyResult.class);
+    }
+
+    @Override
+    public EmptyResult reject_video_comment(int vcid) {
+        return gson.fromJson(sendGet(getUrlWithArgs(TOKEN,getToken(),ACTION,"reject_video_comment","vcid",vcid)), EmptyResult.class);
+    }
 }

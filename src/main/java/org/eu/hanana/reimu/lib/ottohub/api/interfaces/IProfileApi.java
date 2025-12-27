@@ -44,4 +44,7 @@ public interface IProfileApi {
     CoverListResult audit_cover_list(int offset,int num);
     @RequireToken
     VideoListResult history_video_list();
+    @RequireToken
+    IsAuditResult is_audit();
+
 }

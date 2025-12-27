@@ -10,6 +10,8 @@ import org.eu.hanana.reimu.lib.ottohub.util.InputStreamRequestBody;
 import org.eu.hanana.reimu.lib.ottohub.util.ProgressedRequestBody;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -79,6 +81,58 @@ public class CreatorApi extends ApiBase implements ICreatorApi {
                 TOKEN,  RequestBody.create(getToken(),TYPE_TEXT_PLAIN),
                 "content",  RequestBody.create(content,TYPE_TEXT_PLAIN)
         ))),EmptyResult.class);
+    }
+
+    @Override
+    public ImageUrlResult submit_image(InputStream file_img, ProgressedRequestBody.ProgressListener progressListener) {
+        var action = "submit_image";
+        return gson.fromJson(sendPost(getApiUrl(action),newRequestBody(progressListener,Map.of(
+                ACTION, RequestBody.create(action,TYPE_TEXT_PLAIN),
+                TOKEN,  RequestBody.create(getToken(),TYPE_TEXT_PLAIN),
+                "file_img",  new InputStreamRequestBody(file_img,TYPE_IMAGE_JPEG).setName("file.jpg")
+        ))),ImageUrlResult.class);
+    }
+
+    @Override
+    public SubmitMediaResult submit_media(String title, String intro, String tag, String original_source, String media_type, String copyright_type, InputStream file_media, ProgressedRequestBody.ProgressListener progressListener) {
+        var action = "submit_media";
+        return gson.fromJson(sendPost(getApiUrl(action),newRequestBody(progressListener,Map.of(
+                ACTION, RequestBody.create(action,TYPE_TEXT_PLAIN),
+                TOKEN,  RequestBody.create(getToken(),TYPE_TEXT_PLAIN),
+                "title",  RequestBody.create(title,TYPE_TEXT_PLAIN),
+                "intro",  RequestBody.create(intro,TYPE_TEXT_PLAIN),
+                "tag",  RequestBody.create(tag,TYPE_TEXT_PLAIN),
+                "original_source",  RequestBody.create(original_source,TYPE_TEXT_PLAIN),
+                "media_type",  RequestBody.create(media_type,TYPE_TEXT_PLAIN),
+                "copyright_type",  RequestBody.create(copyright_type,TYPE_TEXT_PLAIN),
+                "file_media",  new InputStreamRequestBody(file_media,TYPE_IMAGE_JPEG).setName("file.jpg")
+        ))),SubmitMediaResult.class);
+    }
+
+    @Override
+    public EmptyResult update_video(int vid, String title, String intro, String tag, InputStream file_mp4, InputStream file_jpg, ProgressedRequestBody.ProgressListener progressListener) {
+        var action = "update_video";
+        var map = new HashMap<>(Map.of(
+                ACTION, RequestBody.create(action,TYPE_TEXT_PLAIN),
+                TOKEN,  RequestBody.create(getToken(),TYPE_TEXT_PLAIN)
+
+        ));
+        if (file_jpg!=null){
+            map.put("file_jpg", new InputStreamRequestBody(file_jpg,TYPE_IMAGE_JPEG).setName("file.jpg"));
+        }
+        if (file_mp4!=null){
+            map.put("file_mp4", new InputStreamRequestBody(file_jpg,TYPE_VIDEO_MP4).setName("file.mp4"));
+        }
+        if (tag!=null){
+            map.put("tag",  RequestBody.create(tag,TYPE_TEXT_PLAIN));
+        }
+        if (intro!=null){
+            map.put("intro",  RequestBody.create(intro,TYPE_TEXT_PLAIN));
+        }
+        if (title!=null){
+            map.put("title",  RequestBody.create(title,TYPE_TEXT_PLAIN));
+        }
+        return gson.fromJson(sendPost(getApiUrl(action),newRequestBody(progressListener,map)),EmptyResult.class);
     }
 
     @Override

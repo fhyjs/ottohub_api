@@ -34,4 +34,14 @@ public class FollowingApi extends ApiBase implements IFollowingApi {
     public UserListResult fan_list(int uid,int offset, int num) {
         return gson.fromJson(sendGet(getUrlWithArgs("uid", String.valueOf(uid),ACTION,"fan_list","offset", String.valueOf(offset),"num", String.valueOf(num))), UserListResult.class);
     }
+
+    @Override
+    public TimelineListResult following_all_timeline(int offset, int num) {
+        return gson.fromJson(sendGet(getUrlWithArgs(TOKEN,getToken(),ACTION,"following_all_timeline","offset", String.valueOf(offset),"num", String.valueOf(num))), TimelineListResult.class);
+    }
+
+    @Override
+    public UserListResult following_active_list(int uid, int offset, int num) {
+        return gson.fromJson(sendGet(getUrlWithArgs(TOKEN,getToken(),ACTION,"following_active_list","uid",uid,"offset", String.valueOf(offset),"num", String.valueOf(num))), UserListResult.class);
+    }
 }

@@ -12,4 +12,10 @@ public interface IDanmakuApi {
     EmptyResult delete_danmaku(long danmaku_id);
     @RequireToken
     EmptyResult report_danmaku(long danmaku_id);
+    @RequireToken
+    DanmakuListResult audit_danmaku_list(int offest,int num);
+    @RequireToken
+    EmptyResult approve_danmaku(long danmaku_id);
+    @RequireToken
+    EmptyResult reject_danmaku(long danmaku_id);
 }

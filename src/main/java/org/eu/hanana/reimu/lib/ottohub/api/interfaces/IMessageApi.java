@@ -5,6 +5,7 @@ import org.eu.hanana.reimu.lib.ottohub.api.common.EmptyResult;
 import org.eu.hanana.reimu.lib.ottohub.api.im.MessageListResult;
 import org.eu.hanana.reimu.lib.ottohub.api.im.MessageResult;
 import org.eu.hanana.reimu.lib.ottohub.api.im.NewMessageNumResult;
+import org.eu.hanana.reimu.lib.ottohub.api.user.UserListResult;
 
 public interface IMessageApi {
     @RequireToken
@@ -21,4 +22,10 @@ public interface IMessageApi {
     MessageResult read_message(int msg_id);
     @RequireToken
     EmptyResult read_all_system_message();
+    @RequireToken
+    EmptyResult delete_message(int msg_id);
+    @RequireToken
+    UserListResult friend_list(int offset,int num,boolean if_time_desc);
+    @RequireToken
+    MessageListResult friend_message(int friend_uid,int offset,int num,boolean if_time_desc);
 }

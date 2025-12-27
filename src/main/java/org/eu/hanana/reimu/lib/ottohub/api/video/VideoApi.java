@@ -2,7 +2,6 @@ package org.eu.hanana.reimu.lib.ottohub.api.video;
 
 import org.eu.hanana.reimu.lib.ottohub.api.ApiBase;
 import org.eu.hanana.reimu.lib.ottohub.api.OttohubApi;
-import org.eu.hanana.reimu.lib.ottohub.api.auth.SendRegisterVerificationCodeResult;
 import org.eu.hanana.reimu.lib.ottohub.api.interfaces.IVideoApi;
 
 public class VideoApi extends ApiBase implements IVideoApi {
@@ -48,6 +47,11 @@ public class VideoApi extends ApiBase implements IVideoApi {
     @Override
     public VideoListResult audit_video_list(int offset, int num) {
         return gson.fromJson(sendGet(getUrlWithArgs(TOKEN,ottohubApi.getLoginToken(),ACTION,"audit_video_list","offset",String.valueOf(offset),"num", String.valueOf(num))), VideoListResult.class);
+    }
+
+    @Override
+    public VideoListResult related_video_list(int vid, int offset, int num) {
+        return gson.fromJson(sendGet(getUrlWithArgs(ACTION,"related_video_list","offset",String.valueOf(offset),"num", String.valueOf(num))), VideoListResult.class);
     }
 
     @Override

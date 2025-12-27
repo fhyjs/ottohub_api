@@ -20,6 +20,7 @@ import org.eu.hanana.reimu.lib.ottohub.api.profile.ProfileApi;
 import org.eu.hanana.reimu.lib.ottohub.api.system.SystemApi;
 import org.eu.hanana.reimu.lib.ottohub.api.user.UserApi;
 import org.eu.hanana.reimu.lib.ottohub.api.video.VideoApi;
+import org.eu.hanana.reimu.lib.ottohub.media.MediaApi;
 
 public class OttohubApi {
     @Setter
@@ -59,6 +60,8 @@ public class OttohubApi {
     protected ICreatorApi creatorApi = new CreatorApi(this);
     @Getter
     protected ICollectionApi collectionApi = new CollectionApi(this);
+    @Getter
+    protected IMediaApi mediaApi = new MediaApi(this);
 
     public OttohubApi(){
         httpClient = new OkHttpClient.Builder().build();
