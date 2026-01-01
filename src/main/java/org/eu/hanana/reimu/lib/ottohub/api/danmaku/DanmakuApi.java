@@ -1,9 +1,15 @@
 package org.eu.hanana.reimu.lib.ottohub.api.danmaku;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 import org.eu.hanana.reimu.lib.ottohub.api.ApiBase;
 import org.eu.hanana.reimu.lib.ottohub.api.OttohubApi;
 import org.eu.hanana.reimu.lib.ottohub.api.common.EmptyResult;
 import org.eu.hanana.reimu.lib.ottohub.api.interfaces.IDanmakuApi;
+
+import java.util.List;
 
 public class DanmakuApi extends ApiBase implements IDanmakuApi {
     public DanmakuApi(OttohubApi ottohubApi) {
@@ -15,9 +21,14 @@ public class DanmakuApi extends ApiBase implements IDanmakuApi {
         return "danmaku";
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public DanmakuListResult get_danmaku(int vid) {
-        return gson.fromJson(sendGet(getUrlWithArgs(ACTION,"get_danmaku","vid", String.valueOf(vid))), DanmakuListResult.class);
+        var data = sendGet(getUrlWithArgs(ACTION,"get_danmaku","vid", String.valueOf(vid)));
+        JsonObject asJsonObject = JsonParser.parseString(data).getAsJsonObject();
+        DanmakuListResult danmakuListResult = gson.fromJson(asJsonObject, DanmakuListResult.class);
+        danmakuListResult.data= (List<DanmakuResult>) gson.fromJson(asJsonObject.get("danmaku_list"), TypeToken.getParameterized(List.class,DanmakuResult.class));
+        return danmakuListResult;
     }
 
     @Override
