@@ -13,7 +13,7 @@ public interface IDanmakuApi {
     @RequireToken
     EmptyResult report_danmaku(long danmaku_id);
     @RequireToken
-    DanmakuListResult audit_danmaku_list(int offest,int num);
+    DanmakuListResult audit_danmaku_list(int offset,int num);
     @RequireToken
     EmptyResult approve_danmaku(long danmaku_id);
     @RequireToken

@@ -36,8 +36,8 @@ public class DanmakuApi extends ApiBase implements IDanmakuApi {
     }
 
     @Override
-    public DanmakuListResult audit_danmaku_list(int offest, int num) {
-        return gson.fromJson(sendGet(getUrlWithArgs(TOKEN,getToken(),ACTION,"audit_danmaku_list","offest",offest,"num",num)), DanmakuListResult.class);
+    public DanmakuListResult audit_danmaku_list(int offset, int num) {
+        return gson.fromJson(sendGet(getUrlWithArgs(TOKEN,getToken(),ACTION,"audit_danmaku_list","offset",offset,"num",num)), DanmakuListResult.class);
     }
 
     @Override
