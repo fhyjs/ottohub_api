@@ -51,7 +51,7 @@ public class VideoApi extends ApiBase implements IVideoApi {
 
     @Override
     public VideoListResult related_video_list(int vid, int offset, int num) {
-        return gson.fromJson(sendGet(getUrlWithArgs(ACTION,"related_video_list","offset",String.valueOf(offset),"num", String.valueOf(num))), VideoListResult.class);
+        return gson.fromJson(sendGet(getUrlWithArgs(ACTION,"related_video_list","offset",String.valueOf(offset),"vid",String.valueOf(vid),"num", String.valueOf(num))), VideoListResult.class);
     }
 
     @Override
