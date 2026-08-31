@@ -8,6 +8,7 @@ import org.eu.hanana.reimu.lib.ottohub.util.ProgressedRequestBody;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 public abstract class ApiBase {
@@ -21,7 +22,7 @@ public abstract class ApiBase {
     protected Gson gson= new Gson();
     public ApiBase(OttohubApi ottohubApi) {
         this.ottohubApi=ottohubApi;
-        this.apiUrl = ottohubApi.apiHost+"?module="+getModule();
+        this.apiUrl = ottohubApi.apiHost+getModule()+"/";
     }
     @Nullable
     public String getToken(){
@@ -60,6 +61,14 @@ public abstract class ApiBase {
             throw e;
         }
     }
+    public Map<String,RequestBody> textRequestBodies(String... kv){
+        var mb = new HashMap<String,RequestBody>();
+        for (int i = 0; i < kv.length; i+=2) {
+            if (kv[i]==null||kv[i+1]==null) continue;
+            mb.put(kv[i],RequestBody.create(kv[i+1],TYPE_TEXT_PLAIN));
+        }
+        return mb;
+    }
     public ProgressedRequestBody newRequestBody(Map<String,RequestBody> data){
         return this.newRequestBody(null,data);
     }
@@ -83,8 +92,12 @@ public abstract class ApiBase {
      * @return full api url
      */
     public String getUrlWithArgs(Object... kv){
-        var sb = new StringBuilder(apiUrl);
-        for (int i = 0; i < kv.length; i+=2) {
+        String action="";
+        if (kv.length%2!=0){
+            action= kv[0].toString();
+        }
+        var sb = new StringBuilder(apiUrl+action+"?");
+        for (int i = action.isEmpty()?0:1; i < kv.length; i+=2) {
             if (kv[i]==null||kv[i+1]==null) continue;
             sb.append('&').append(kv[i].toString()).append('=').append(kv[i+1].toString());
         }

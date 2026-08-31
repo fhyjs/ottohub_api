@@ -5,6 +5,8 @@ import org.eu.hanana.reimu.lib.ottohub.api.OttohubApi;
 import org.eu.hanana.reimu.lib.ottohub.api.common.EmptyResult;
 import org.eu.hanana.reimu.lib.ottohub.api.interfaces.IAuthApi;
 
+import java.util.Map;
+
 public class AuthApi extends ApiBase implements IAuthApi {
     public AuthApi(OttohubApi ottohubApi) {
         super(ottohubApi);
@@ -12,7 +14,7 @@ public class AuthApi extends ApiBase implements IAuthApi {
 
     @Override
     public LoginResult login(String uid_email, String password) {
-        LoginResult loginResult = gson.fromJson(sendGet(getUrlWithArgs(ACTION, "login", "uid_email", uid_email, "pw", password)), LoginResult.class);
+        LoginResult loginResult = gson.fromJson(sendPost(getUrlWithArgs("login"),newRequestBody(null, textRequestBodies("pw",password,"uid_email",uid_email))), LoginResult.class);
         if (loginResult.isSuccess())
             ottohubApi.setLoginResult(loginResult);
         return loginResult;

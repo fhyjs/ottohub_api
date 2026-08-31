@@ -26,7 +26,7 @@ public class OttohubApi {
     @Setter
     @Getter
     protected LoginResult loginResult;
-    public String apiHost="https://api.ottohub.cn/";
+    public String apiHost="https://api.ottohub.cn/api/";
     @Setter
     @Getter
     protected OkHttpClient httpClient;

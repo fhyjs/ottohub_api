@@ -10,7 +10,11 @@ public class LoginResult extends FirstLoginResult {
     public String token;
     public String avatar_url;
     public String cover_url;
+    public String email;
+    public String cover_v_url;
+    public String cover_h_url;
 
+    public int is_audit,is_admin;
 
     public boolean is_today_first_login() {
         return !"no".equals(if_today_first_login);

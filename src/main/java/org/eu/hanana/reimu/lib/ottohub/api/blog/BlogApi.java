@@ -18,7 +18,7 @@ public class BlogApi extends ApiBase implements IBlogApi {
 
     @Override
     public BlogListResult random_blog_list(int num) {
-        return gson.fromJson(sendGet(getUrlWithArgs(ACTION,"random_blog_list","num", String.valueOf(num))), BlogListResult.class);
+        return gson.fromJson(sendGet(getUrlWithArgs("random","num", String.valueOf(num))), BlogListResult.class);
     }
 
     @Override
@@ -53,6 +53,6 @@ public class BlogApi extends ApiBase implements IBlogApi {
 
     @Override
     public BlogResult get_blog_detail(int bid) {
-        return gson.fromJson(sendGet(getUrlWithArgs(TOKEN,ottohubApi.getLoginToken(),ACTION,"get_blog_detail","bid", String.valueOf(bid))), BlogResult.class);
+        return gson.fromJson(sendGet(getUrlWithArgs(bid+"/detail",TOKEN,ottohubApi.getLoginToken(),ACTION,"get_blog_detail","bid", String.valueOf(bid))), BlogResult.class);
     }
 }

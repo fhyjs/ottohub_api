@@ -1,9 +1,12 @@
 package org.eu.hanana.reimu.lib.ottohub.api.video;
 
+import com.google.gson.reflect.TypeToken;
 import org.eu.hanana.reimu.lib.ottohub.api.ApiBase;
 import org.eu.hanana.reimu.lib.ottohub.api.OttohubApi;
+import org.eu.hanana.reimu.lib.ottohub.api.common.DataWrapResult;
 import org.eu.hanana.reimu.lib.ottohub.api.interfaces.IVideoApi;
 
+@SuppressWarnings("unchecked")
 public class VideoApi extends ApiBase implements IVideoApi {
     public VideoApi(OttohubApi ottohubApi) {
         super(ottohubApi);
@@ -11,9 +14,12 @@ public class VideoApi extends ApiBase implements IVideoApi {
 
     @Override
     public VideoListResult random_video_list(int num) {
-        return gson.fromJson(sendGet(getUrlWithArgs(ACTION,"random_video_list","num", String.valueOf(num))), VideoListResult.class);
+        return random_video_list_new(num).getData();
     }
-
+    @Override
+    public DataWrapResult<VideoListResult> random_video_list_new(int num) {
+        return (DataWrapResult<VideoListResult>)(gson.fromJson(sendGet(getUrlWithArgs("random","num", String.valueOf(num))), TypeToken.getParameterized(DataWrapResult.class,VideoListResult.class)));
+    }
     @Override
     public VideoListResult new_video_list(int offset, int num) {
         return gson.fromJson(sendGet(getUrlWithArgs(ACTION,"new_video_list","offset",String.valueOf(offset),"num", String.valueOf(num))), VideoListResult.class);
@@ -55,8 +61,17 @@ public class VideoApi extends ApiBase implements IVideoApi {
     }
 
     @Override
+    public DataWrapResult<VideoPresignedResult> video_presigned(String extension) {
+        return (DataWrapResult<VideoPresignedResult>) gson.fromJson(sendGet(getUrlWithArgs("video-presigned",TOKEN,ottohubApi.getLoginToken())), TypeToken.getParameterized(DataWrapResult.class,VideoPresignedResult.class));
+    }
+
+    @Override
     public VideoResult get_video_detail(int vid) {
-        return gson.fromJson(sendGet(getUrlWithArgs(TOKEN,ottohubApi.getLoginToken(),ACTION,"get_video_detail","vid", String.valueOf(vid))), VideoResult.class);
+        return get_video_detail_new(vid).getData();
+    }
+    @Override
+    public DataWrapResult<VideoResult> get_video_detail_new(int vid) {
+        return (DataWrapResult<VideoResult>) gson.fromJson(sendGet(getUrlWithArgs(vid,TOKEN,ottohubApi.getLoginToken(),"vid", String.valueOf(vid))), TypeToken.getParameterized(DataWrapResult.class,VideoResult.class));
     }
 
     @Override
